@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.Configuration;
+using System.IO;
+using System.Windows;
 
 namespace CryptoPeek
 {
@@ -7,6 +9,16 @@ namespace CryptoPeek
     /// </summary>
     public partial class App : PrismApplication
     {
+        public static IConfiguration Configuration { get; private set; }
+
+        public App()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddUserSecrets<App>();
+
+            Configuration = builder.Build();
+        }
         protected override Window CreateShell()
         {
             var window = Container.Resolve<MainWindow>();
