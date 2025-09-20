@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
+using Microsoft.Extensions.Configuration;
+using CryptoPeek.Services.Rest;
+
 
 namespace CryptoPeek
 {
@@ -27,7 +29,7 @@ namespace CryptoPeek
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
+            containerRegistry.Register<IRestService,  RestService>();
         }
     }
 
