@@ -12,7 +12,13 @@ namespace CryptoPeek.Services.Rest
 
         public Task<ServerResponse<TSuccess, TError>> GetAsync<TSuccess, TError>(string resource, Dictionary<string, string> additionalHeaders = null)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(resource)
+            };
+
+            return SendRequest<TSuccess, TError>(request, additionalHeaders);
         }
 
         #endregion
@@ -36,7 +42,7 @@ namespace CryptoPeek.Services.Rest
             return result;
         }
 
-        private Dictionary<string, string> CreatetHeaders(Dictionary<string, string> additionalHeaders = null)
+        private Dictionary<string, string> CreateHeaders(Dictionary<string, string> additionalHeaders = null)
         {
             if (additionalHeaders == null)
             {
@@ -73,7 +79,7 @@ namespace CryptoPeek.Services.Rest
         {
             var result = new ServerResponse<TSuccess, TError>();
 
-            using (var httpClient = CreateHttpClient(CreatetHeaders(additionalHeaders)))
+            using (var httpClient = CreateHttpClient(CreateHeaders(additionalHeaders)))
             using (var response = await httpClient.SendAsync(request).ConfigureAwait(false))
             {
                 var responseString = await response.Content.ReadAsStringAsync();
