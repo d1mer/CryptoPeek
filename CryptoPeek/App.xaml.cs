@@ -3,6 +3,7 @@ using System.Windows;
 using Microsoft.Extensions.Configuration;
 using CryptoPeek.Services.Crypto;
 using CryptoPeek.Services.Rest;
+using CryptoPeek.Views;
 
 
 namespace CryptoPeek
@@ -22,6 +23,15 @@ namespace CryptoPeek
 
             Configuration = builder.Build();
         }
+
+        protected override void OnInitialized()
+        {
+            var regionManager = Container.Resolve<IRegionManager>();
+            regionManager.RequestNavigate("MainRegion", nameof(CoinsView));
+
+            base.OnInitialized();
+        }
+
         protected override Window CreateShell()
         {
             var window = Container.Resolve<MainWindow>();
@@ -32,6 +42,9 @@ namespace CryptoPeek
         {
             containerRegistry.Register<IRestService,  RestService>();
             containerRegistry.Register<ICryptoService, CryptoService>();
+
+            containerRegistry.RegisterForNavigation<CoinsView>();
+            containerRegistry.RegisterForNavigation<CoinDetailsView>();
         }
     }
 

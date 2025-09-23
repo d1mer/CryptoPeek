@@ -25,7 +25,6 @@ namespace CryptoPeek.Services.Crypto
                 if (responce.IsSuccess)
                 {
                     result.AddRange(responce.SuccessResult);
-                    var i = 1;
                 }
             }
             catch (Exception ex)

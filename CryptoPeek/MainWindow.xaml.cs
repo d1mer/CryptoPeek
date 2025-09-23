@@ -1,14 +1,5 @@
-﻿using CryptoPeek.Services.Crypto;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using CryptoPeek.Services.Crypto;
 
 namespace CryptoPeek
 {
@@ -17,13 +8,9 @@ namespace CryptoPeek
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ICryptoService _cryptoService;
-
-        public MainWindow(ICryptoService cryptoService)
+        public MainWindow()
         {
             InitializeComponent();
-
-            _cryptoService = cryptoService;
         }
     }
 }
