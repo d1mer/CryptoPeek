@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using CryptoPeek.Enums;
 using CryptoPeek.Extensions;
 using CryptoPeek.Models.Coin;
@@ -10,11 +11,15 @@ namespace CryptoPeek.ViewModels
     public class CoinsViewModel : BindableBase, INavigationAware
     {
         private readonly ICryptoService _cryptoService;
+        private readonly IRegionManager _regionManager;
         private List<CoinShortViewModel> _coinsCache;
 
-        public CoinsViewModel(ICryptoService cryptoService)
+        public CoinsViewModel(ICryptoService cryptoService, IRegionManager regionManager)
         {
             _cryptoService = cryptoService;
+            _regionManager = regionManager;
+
+            OpenCoinDetailsCommand = new DelegateCommand<CoinShortViewModel>(OnOpenoCoinDetails);
         }
 
         #region -- Public properties --
@@ -46,6 +51,8 @@ namespace CryptoPeek.ViewModels
                 PerformSearch(value);
             }
         }
+
+        public ICommand OpenCoinDetailsCommand { get; }
 
         #endregion
 
@@ -133,6 +140,21 @@ namespace CryptoPeek.ViewModels
                     _coinsCache.Clear();
                     _coinsCache = default;
                     break;
+            }
+        }
+
+        private void OnOpenoCoinDetails(CoinShortViewModel coin)
+        {
+            if (coin != null)
+            {
+                var navigationParameters = new NavigationParameters
+                {
+                    {
+                        "id", coin.Id
+                    }
+                };
+
+                _regionManager.RequestNavigate("MainRegion", "CoinDetailsView", navigationParameters);
             }
         }
 

@@ -8,6 +8,7 @@ namespace CryptoPeek.Extensions
         {
             return new CoinShortViewModel
             {
+                Id = coinModel.Id,
                 Image = coinModel.Image,
                 Symbol = coinModel.Symbol,
                 Name = coinModel.Name,

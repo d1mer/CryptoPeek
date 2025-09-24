@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:CryptoPeek.Views"
              xmlns:converters="clr-namespace:CryptoPeek.Converters"
              xmlns:controls="clr-namespace:CryptoPeek.Controls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000">
 
@@ -26,10 +28,28 @@
                   ItemsSource="{Binding Coins}"
                   Margin="0">
 
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <prism:InvokeCommandAction Command="{Binding OpenCoinDetailsCommand}"
+                                               CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
             <ListView.Resources>
+                
                 <Style TargetType="{x:Type GridViewColumnHeader}">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
                 </Style>
+
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#F5F5F5" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                
             </ListView.Resources>
             
             <ListView.View>
