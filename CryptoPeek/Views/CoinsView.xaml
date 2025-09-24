@@ -5,15 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CryptoPeek.Views"
              xmlns:converters="clr-namespace:CryptoPeek.Converters"
+             xmlns:controls="clr-namespace:CryptoPeek.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.07*" />
+            <RowDefinition Height="0.08*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
+        <controls:SearchBox DataContext="{Binding}"
+                            Margin="10"
+                            HorizontalAlignment="Left"
+                            IsFocusedSearchBox="{Binding IsSearchFocused, Mode=OneWayToSource}"
+                            SearchText="{Binding SearchText,
+                              Mode=OneWayToSource}"/>
+
         <ListView Grid.Row="1" 
                   ItemsSource="{Binding Coins}"
                   Margin="0">
