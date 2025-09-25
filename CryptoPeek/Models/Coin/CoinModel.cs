@@ -82,17 +82,4 @@ namespace CryptoPeek.Models.Coin
         [JsonProperty("last_updated")]
         public DateTime? LastUpdated { get; set; }
     }
-
-
-    public class Roi
-    {
-        [JsonProperty("times")]
-        public decimal? Times { get; set; }
-
-        [JsonProperty("currency")]
-        public string Currency { get; set; }
-
-        [JsonProperty("percentage")]
-        public decimal? Percentage { get; set; }
-    }
 }
