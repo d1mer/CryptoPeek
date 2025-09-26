@@ -15,7 +15,7 @@ namespace CryptoPeek.Models.Coin
 
         public string HashingAlgorithm { get; set; }
 
-        public DateTime GenesisDate { get; set; }
+        public DateTime? GenesisDate { get; set; }
 
         public int? MarketCapRank { get; set; }
 

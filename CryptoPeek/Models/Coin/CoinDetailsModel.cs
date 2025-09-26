@@ -30,7 +30,7 @@ namespace CryptoPeek.Models.Coin
         public CoinImages Image { get; set; }  // done
 
         [JsonProperty("genesis_date")]
-        public DateTime GenesisDate { get; set; }  // done
+        public DateTime? GenesisDate { get; set; }  // done
 
         [JsonProperty("market_cap_rank")]
         public int? MarketCapRank { get; set; } // done
