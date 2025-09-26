@@ -9,6 +9,7 @@
         {
             public const string COINGECKO_BASE_URL = @"https://api.coingecko.com/api/v3/";
             public const string COINS_LIST = @"coins/markets?vs_currency=usd";
+            public const string COIN_BY_ID = @"coins/{0}?localization=false&tickers=false&developer_data=false&community_data=false";
         }
     }
 }

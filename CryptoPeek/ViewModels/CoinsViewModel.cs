@@ -65,7 +65,6 @@ namespace CryptoPeek.ViewModels
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            //throw new NotImplementedException();
             return false;
         }
 

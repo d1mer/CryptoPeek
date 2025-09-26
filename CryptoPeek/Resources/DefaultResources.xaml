@@ -5,5 +5,6 @@
     <converters:CoinPriceConverter x:Key="coinPriceConverter"/>
     <converters:PriceChangePercent24Converter x:Key="priceChangePercent24Converter" />
     <converters:PriceChangePercent24ToBrushConverter x:Key="priceChangePercent24ToBrushConverter" />
+    <converters:DecimalToStringConverter x:Key="decimalToStringConverter" />
 
 </ResourceDictionary>

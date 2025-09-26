@@ -1,17 +1,18 @@
 ﻿using Newtonsoft.Json;
+using System.Security.Policy;
 
 namespace CryptoPeek.Models.Coin
 {
     public class CoinDetailsModel
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string Id { get; set; }  // done
 
         [JsonProperty("symbol")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; }  // done
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; }  // done
 
         [JsonProperty("hashing_algorithm")]
         public string HashingAlgorithm { get; set; }
@@ -20,19 +21,22 @@ namespace CryptoPeek.Models.Coin
         public List<string> Categories { get; set; }
 
         [JsonProperty("description")]
-        public Dictionary<string, string> Description { get; set; }
+        public Dictionary<string, string> Description { get; set; } // done
 
         [JsonProperty("links")]
         public CoinLinks Links { get; set; }
 
         [JsonProperty("image")]
-        public CoinImages Image { get; set; }
+        public CoinImages Image { get; set; }  // done
 
         [JsonProperty("genesis_date")]
         public DateTime GenesisDate { get; set; }
 
         [JsonProperty("market_cap_rank")]
         public int? MarketCapRank { get; set; }
+
+        [JsonProperty("market_data")]
+        public MarketData MarketData { get; set; }
     }
 
     public class CoinLinks
@@ -41,7 +45,7 @@ namespace CryptoPeek.Models.Coin
         public List<string> Homepage { get; set; }
 
         [JsonProperty("whitepaper")]
-        public List<string>Whitepaper { get; set; }
+        public string Whitepaper { get; set; }
 
         [JsonProperty("blockchain_site")]
         public List<string> BlockchainSite { get; set; }
@@ -56,10 +60,10 @@ namespace CryptoPeek.Models.Coin
         public List<string> AnnouncementUrl { get; set; }
 
         [JsonProperty("snapshot_url")]
-        public List<string> SnapshotUrl { get; set; }
+        public string SnapshotUrl { get; set; }
 
         [JsonProperty("subreddit_url")]
-        public List<string> SubredditUrl { get; set; }
+        public string SubredditUrl { get; set; }
 
         [JsonProperty("repos_url")]
         public CoinLinksRepos ReposUrl { get; set; }

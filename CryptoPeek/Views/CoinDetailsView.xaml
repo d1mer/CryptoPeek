@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CryptoPeek.Views"
+             xmlns:controls="clr-namespace:CryptoPeek.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000">
     
@@ -13,7 +14,8 @@
             <RowDefinition Height="0.04*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
+        
+        <!-- BACK BUTTON -->
         <Button Grid.Row="0"
                 HorizontalAlignment="Left"
                 Background="Transparent"
@@ -21,6 +23,66 @@
                 Command="{Binding BackCommand}">
             <Image Source="/Images/ic_arrow.png" />
         </Button>
+        
+        <!-- MAIN CONTENT -->
+        <ScrollViewer Grid.Row="1"
+                      Margin="5,5,0,0">
+
+            <StackPanel Margin="0,0,10,0">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.15*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- DESCRIPTION -->
+                    <controls:ExpandableTextBlock Grid.Column="0" 
+                                                  Text="{Binding Coin.Description}"
+                                                  CollapsedLines="3" />
+                    
+                    <!-- IMAGE AND NAME -->
+                    <StackPanel Grid.Column="1">
+
+                        <Image Source="{Binding Coin.Image}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"/>
+
+                        <TextBlock Text="{Binding Coin.Name}"
+                                   FontSize="16"
+                                   FontWeight="Medium" 
+                                   HorizontalAlignment="Center"
+                                   Margin="0,5,0,0"/>
+
+                        <TextBlock Text="{Binding Coin.Symbol}"
+                                   FontSize="14"
+                                   FontWeight="Medium" 
+                                   HorizontalAlignment="Center" />
+
+                    </StackPanel>
+
+                </Grid>
+                
+                <!-- MAIN INFO AND PRICES -->
+                <Grid Margin="0,20,0,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <controls:InfoSelector Grid.Column="1" 
+                                           Items="{Binding Coin.MarketData.CurrentPrice.Keys}"
+                                           Title="Current prices"
+                                           SelectedValue="{Binding CurrentPricesValue}"
+                                           SelectedItem="{Binding SelectedCurrentPrice, Mode=TwoWay}"/>
+
+                </Grid>
+
+            </StackPanel>
+
+        </ScrollViewer>
 
     </Grid>
 </UserControl>

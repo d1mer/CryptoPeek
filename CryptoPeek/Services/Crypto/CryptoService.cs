@@ -35,6 +35,27 @@ namespace CryptoPeek.Services.Crypto
             return result;
         }
 
+        public async Task<CoinDetailsModel> GetCoinById(string id)
+        {
+            CoinDetailsModel coin = default;
+
+            try
+            {
+                var responce = await _restService.GetAsync<CoinDetailsModel, object>(Constants.WebAPI.COINGECKO_BASE_URL + string.Format(Constants.WebAPI.COIN_BY_ID, id), GetApiKeyHeaderDictionary());
+
+                if (responce.IsSuccess)
+                {
+                    coin = responce.SuccessResult;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"CryptoService.GetCoinById error: {ex.Message}");
+            }
+
+            return coin;
+        }
+
         #endregion
 
         #region -- Private helpers --
