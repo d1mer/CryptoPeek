@@ -45,7 +45,7 @@
         <StackPanel>
 
             <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                       FontSize="14"
+                       FontSize="12"
                        FontWeight="SemiBold"
                        Foreground="#444"
                        Margin="0,0,0,8"
@@ -60,7 +60,7 @@
             <Border Style="{StaticResource ValueCardStyle}">
 
                 <TextBlock Text="{Binding SelectedValue, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource decimalToStringConverter}}"
-                           FontSize="18"
+                           FontSize="14"
                            FontWeight="Medium"
                            Foreground="#111"
                            HorizontalAlignment="Center" />

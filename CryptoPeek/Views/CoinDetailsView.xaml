@@ -7,6 +7,16 @@
              xmlns:controls="clr-namespace:CryptoPeek.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+
+        <Style x:Key="infoTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+    </UserControl.Resources>
     
     <Grid Margin="5">
 
@@ -70,13 +80,116 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="0.3*" />
                     </Grid.ColumnDefinitions>
 
                     <controls:InfoSelector Grid.Column="1" 
                                            Items="{Binding Coin.MarketData.CurrentPrice.Keys}"
-                                           Title="Current prices"
+                                           Title="Current Prices"
                                            SelectedValue="{Binding CurrentPricesValue}"
                                            SelectedItem="{Binding SelectedCurrentPrice, Mode=TwoWay}"/>
+
+                    <controls:InfoSelector Grid.Column="3" 
+                                           Items="{Binding Coin.MarketData.MarketCap.Keys}"
+                                           Title="Market Capitalization"
+                                           SelectedValue="{Binding CurrentMarketCapValue}"
+                                           SelectedItem="{Binding SelectedMarketCap, Mode=TwoWay}"/>
+
+                    <GroupBox Header="Main Info"
+                              TextBlock.FontSize="18"
+                              TextBlock.FontWeight="Medium"
+                              TextBlock.Foreground="#444"
+                              Margin="0,0,50,0">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Column="0"
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="Genesis Date"/>
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="{Binding Coin.GenesisDate, StringFormat='dd.MM.yyyy'}"/>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0"
+                                        Grid.Row="2"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="Hashing Algorithm"/>
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="{Binding Coin.HashingAlgorithm}"/>
+                                
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1"
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="Market Cap Rank"/>
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="{Binding Coin.MarketCapRank}"/>
+                                
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1"
+                                        Grid.Row="2"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="Total Supply"/>
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="{Binding Coin.MarketData.TotalSupply, Converter={StaticResource decimalToStringConverter}}"/>
+                                
+                                
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2"
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="Circulating Supply"/>
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="{Binding Coin.MarketData.CirculatingSupply, Converter={StaticResource decimalToStringConverter}}"/>
+                                
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2"
+                                        Grid.Row="2"
+                                        HorizontalAlignment="Center">
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="Max Supply"/>
+
+                                <TextBlock Style="{StaticResource infoTextStyle}"
+                                           Text="{Binding Coin.MarketData.MaxSupply, Converter={StaticResource decimalToStringConverter}}"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+                    </GroupBox>
 
                 </Grid>
 

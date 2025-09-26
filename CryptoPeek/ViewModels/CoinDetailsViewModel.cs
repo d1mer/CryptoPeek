@@ -45,6 +45,24 @@ namespace CryptoPeek.ViewModels
             }
         }
 
+        private decimal _currentMarketCapValue;
+        public decimal CurrentMarketCapValue
+        {
+            get => _currentMarketCapValue;
+            set => SetProperty(ref _currentMarketCapValue, value);
+        }
+
+        private string _selectedMarketCap;
+        public string SelectedMarketCap
+        {
+            get => _selectedMarketCap;
+            set
+            {
+                SetProperty(ref _selectedMarketCap, value);
+                CurrentMarketCapValue = Coin.MarketData.MarketCap[_selectedMarketCap];
+            }
+        }
+
         public ICommand BackCommand { get; }
 
         #endregion

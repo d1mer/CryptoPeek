@@ -15,7 +15,7 @@ namespace CryptoPeek.Models.Coin
         public string Name { get; set; }  // done
 
         [JsonProperty("hashing_algorithm")]
-        public string HashingAlgorithm { get; set; }
+        public string HashingAlgorithm { get; set; }  // done
 
         [JsonProperty("categories")]
         public List<string> Categories { get; set; }
@@ -30,10 +30,10 @@ namespace CryptoPeek.Models.Coin
         public CoinImages Image { get; set; }  // done
 
         [JsonProperty("genesis_date")]
-        public DateTime GenesisDate { get; set; }
+        public DateTime GenesisDate { get; set; }  // done
 
         [JsonProperty("market_cap_rank")]
-        public int? MarketCapRank { get; set; }
+        public int? MarketCapRank { get; set; } // done
 
         [JsonProperty("market_data")]
         public MarketData MarketData { get; set; }
@@ -93,13 +93,13 @@ namespace CryptoPeek.Models.Coin
     public class MarketData
     {
         [JsonProperty("current_price")]
-        public Dictionary<string, decimal> CurrentPrice { get; set; }
+        public Dictionary<string, decimal> CurrentPrice { get; set; }  // done
 
         [JsonProperty("roi")]
         public Roi Roi { get; set; }
 
         [JsonProperty("market_cap")]
-        public Dictionary<string, decimal> MarketCap { get; set; }
+        public Dictionary<string, decimal> MarketCap { get; set; }  // done
 
         [JsonProperty("total_volume")]
         public Dictionary<string, decimal> TotalVolume { get; set; }
@@ -138,9 +138,12 @@ namespace CryptoPeek.Models.Coin
         public decimal? MarketCapChange24h { get; set; }
 
         [JsonProperty("total_supply")]
-        public decimal? TotalSupply { get; set; }
+        public decimal? TotalSupply { get; set; } // done
 
         [JsonProperty("circulating_supply")]
-        public decimal? CirculatingSupply { get; set; }
+        public decimal? CirculatingSupply { get; set; } // done
+
+        [JsonProperty("max_supply")]
+        public decimal? MaxSupply { get; set; } // done
     }
 }

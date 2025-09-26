@@ -28,6 +28,9 @@ namespace CryptoPeek.Extensions
                 Symbol = coinDetailsModel.Symbol,
                 Name = coinDetailsModel.Name,
                 Image = coinDetailsModel.Image.Large,
+                HashingAlgorithm = coinDetailsModel.HashingAlgorithm,
+                GenesisDate = coinDetailsModel.GenesisDate,
+                MarketCapRank = coinDetailsModel.MarketCapRank,
             };
 
             if (coinDetailsModel.Description.ContainsKey("en"))
@@ -37,6 +40,10 @@ namespace CryptoPeek.Extensions
 
             coinFull.MarketData = new MarketDataViewModel();
             coinFull.MarketData.CurrentPrice = new Dictionary<string, decimal>(coinDetailsModel.MarketData.CurrentPrice);
+            coinFull.MarketData.MarketCap = new Dictionary<string, decimal>(coinDetailsModel.MarketData.MarketCap);
+            coinFull.MarketData.CirculatingSupply = coinDetailsModel.MarketData.CirculatingSupply;
+            coinFull.MarketData.TotalSupply = coinDetailsModel.MarketData.TotalSupply;
+            coinFull.MarketData.MaxSupply = coinDetailsModel.MarketData.MaxSupply;
 
             return coinFull;
         }
