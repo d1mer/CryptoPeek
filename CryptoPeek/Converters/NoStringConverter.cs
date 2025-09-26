@@ -3,21 +3,21 @@ using System.Windows.Data;
 
 namespace CryptoPeek.Converters
 {
-    internal class DecimalToStringConverter : IValueConverter
+    public class NoStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is decimal dec)
+            if ((value is string str && string.IsNullOrEmpty(str)) || value is null)
             {
-                return $"{dec.ToString("G29", CultureInfo.InvariantCulture)}";
+                return "\u2014";
             }
 
-            return "\u2014";
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;   
+            return value;
         }
     }
 }

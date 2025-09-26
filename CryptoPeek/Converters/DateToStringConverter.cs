@@ -3,21 +3,23 @@ using System.Windows.Data;
 
 namespace CryptoPeek.Converters
 {
-    internal class DecimalToStringConverter : IValueConverter
+    public class DateToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is decimal dec)
+            if (value is DateTime date)
             {
-                return $"{dec.ToString("G29", CultureInfo.InvariantCulture)}";
+                return date.ToString("dd.MM.yyyy");
             }
-
-            return "\u2014";
+            else
+            {
+                return "\u2014";
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;   
+            return value;
         }
     }
 }
