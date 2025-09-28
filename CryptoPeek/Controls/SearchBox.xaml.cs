@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace CryptoPeek.Controls
@@ -44,6 +45,20 @@ namespace CryptoPeek.Controls
             set => SetValue (SearchTextProperty, value);
         }
 
+        public static readonly DependencyProperty ClearCommandProperty =
+            DependencyProperty.Register(
+                nameof(ClearCommand),
+                typeof(ICommand),
+                typeof(SearchBox),
+                new PropertyMetadata(null)
+                );
+
+        public ICommand ClearCommand
+        {
+            get => (ICommand)GetValue(ClearCommandProperty);
+            set => SetValue(ClearCommandProperty, value);
+        }
+
         #endregion
 
         #region -- Private helpers --
@@ -63,16 +78,17 @@ namespace CryptoPeek.Controls
             MainBorder.BorderThickness = new Thickness(2);
         }
 
-        private void SearchTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            IsFocusedSearchBox = false;
             SearchTextBox.Text = string.Empty;
-            MainBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(224, 224, 224));
-            MainBorder.BorderThickness = new Thickness(1);
 
-            UpdatePlaceholderVisibility();
+            if (ClearCommand?.CanExecute(null) == true)
+            {
+                ClearCommand.Execute(null);
+            }
         }
 
         #endregion
+
     }
 }

@@ -19,7 +19,8 @@ namespace CryptoPeek.ViewModels
             _cryptoService = cryptoService;
             _regionManager = regionManager;
 
-            OpenCoinDetailsCommand = new DelegateCommand<CoinShortViewModel>(OnOpenoCoinDetails);
+            OpenCoinDetailsCommand = new DelegateCommand<CoinShortViewModel>(OnOpenCoinDetails);
+            ClearSearchCommand = new DelegateCommand(OnClearSearch);
         }
 
         #region -- Public properties --
@@ -37,8 +38,6 @@ namespace CryptoPeek.ViewModels
             {
                 if (value)
                     OnSearchBoxFocused();
-                else
-                    OnSearchBoxLostFocus();
             }
         }
 
@@ -53,6 +52,8 @@ namespace CryptoPeek.ViewModels
         }
 
         public ICommand OpenCoinDetailsCommand { get; }
+
+        public ICommand ClearSearchCommand { get; }
 
         #endregion
 
@@ -84,14 +85,6 @@ namespace CryptoPeek.ViewModels
             if (coins != null && coins.Count > 0)
             {
                 Coins = new ObservableCollection<CoinShortViewModel>(coins.Select(c => c.ToCoinShortViewModel()));
-            }
-        }
-
-        private void OnSearchBoxLostFocus()
-        {
-            if (_coinsCache != null && _coinsCache.Count > 0)
-            {
-                CopyCoins(ECoinsCopyDirection.ToPermanent);
             }
         }
 
@@ -142,7 +135,7 @@ namespace CryptoPeek.ViewModels
             }
         }
 
-        private void OnOpenoCoinDetails(CoinShortViewModel coin)
+        private void OnOpenCoinDetails(CoinShortViewModel coin)
         {
             if (coin != null)
             {
@@ -154,6 +147,14 @@ namespace CryptoPeek.ViewModels
                 };
 
                 _regionManager.RequestNavigate("MainRegion", "CoinDetailsView", navigationParameters);
+            }
+        }
+
+        private void OnClearSearch()
+        {
+            if (_coinsCache != null && _coinsCache.Count > 0)
+            {
+                CopyCoins(ECoinsCopyDirection.ToPermanent);
             }
         }
 

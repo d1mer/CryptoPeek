@@ -14,13 +14,14 @@
                 BorderThickness="1"
                 CornerRadius="4"
                 Height="25"
-                MaxWidth="200"
-                MinWidth="160">
+                MaxWidth="210"
+                MinWidth="170">
 
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="0"
@@ -39,7 +40,6 @@
                          FontSize="14"
                          Padding="0,0,16,0"
                          GotFocus="SearchTextBox_GotFocus"
-                         LostFocus="SearchTextBox_LostFocus"
                          Text="{Binding SearchText,
                                 RelativeSource={RelativeSource AncestorType=local:SearchBox},
                                 Mode=OneWayToSource,
@@ -53,6 +53,38 @@
                            Foreground="#9E9E9E"
                            VerticalAlignment="Center"
                            IsHitTestVisible="False" />
+
+                <Button x:Name="ClearButton" 
+                        Grid.Column="2"
+                        Content="&#x274E;"
+                        FontSize="12"
+                        TextBlock.TextAlignment="Justify"
+                        Width="16"
+                        Height="16"
+                        Padding="0"
+                        Margin="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="Gray"
+                        ToolTip="Clear"
+                        Command="{Binding ClearCommand, RelativeSource={RelativeSource AncestorType=local:SearchBox}}"
+                        Click="ClearButton_Click">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Visibility" Value="Visible" />
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=SearchTextBox}" Value="">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    
+                </Button>
 
             </Grid>
             

@@ -22,7 +22,8 @@
                             HorizontalAlignment="Left"
                             IsFocusedSearchBox="{Binding IsSearchFocused, Mode=OneWayToSource}"
                             SearchText="{Binding SearchText,
-                              Mode=OneWayToSource}"/>
+                              Mode=OneWayToSource}"
+                            ClearCommand="{Binding ClearSearchCommand}"/>
 
         <ListView Grid.Row="1" 
                   ItemsSource="{Binding Coins}"
