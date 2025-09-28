@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CryptoPeek.Views"
              xmlns:controls="clr-namespace:CryptoPeek.Controls"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000">
 
@@ -192,6 +193,13 @@
                     </GroupBox>
 
                 </Grid>
+                
+                <!-- CHART -->
+                <lvc:CartesianChart Series="{Binding Series}"
+                                    XAxes="{Binding XAxis}"
+                                    YAxes="{Binding YAxis}"
+                                    Height="400"/>
+
 
             </StackPanel>
 

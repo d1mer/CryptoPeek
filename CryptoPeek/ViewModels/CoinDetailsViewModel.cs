@@ -1,7 +1,14 @@
-﻿using System.Windows.Input;
-using CryptoPeek.Extensions;
+﻿using CryptoPeek.Extensions;
 using CryptoPeek.Models.Coin;
+using CryptoPeek.Models.Ohlc;
 using CryptoPeek.Services.Crypto;
+using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace CryptoPeek.ViewModels
 {
@@ -63,6 +70,29 @@ namespace CryptoPeek.ViewModels
             }
         }
 
+        public List<OhlcViewModel> Points { get; set; }
+
+        private ObservableCollection<ISeries> _series;
+        public ObservableCollection<ISeries> Series
+        {
+            get => _series;
+            set => SetProperty(ref _series, value);
+        }
+
+        private ObservableCollection<Axis> _xAxis;
+        public ObservableCollection<Axis> XAxis 
+        {
+            get => _xAxis;
+            set => SetProperty(ref _xAxis, value); 
+        }
+
+        private ObservableCollection<Axis> _yAxis;
+        public ObservableCollection<Axis> YAxis 
+        {
+            get => _yAxis;
+            set => SetProperty(ref _yAxis, value);
+        }
+
         public ICommand BackCommand { get; }
 
         #endregion
@@ -105,9 +135,80 @@ namespace CryptoPeek.ViewModels
             if (!string.IsNullOrEmpty(id))
             {
                 var coin = await _cryptoService.GetCoinById(id);
-                Coin = coin.ToCoinFullViewModel();
-                CurrentPricesValue = Coin.MarketData.CurrentPrice.Values.First();
+
+                if (coin != null)
+                {
+                    Coin = coin.ToCoinFullViewModel();
+                    CurrentPricesValue = Coin.MarketData.CurrentPrice.Values.First();
+                }
+
+                GetOhlcById(id);
             }
+        }
+
+        private async Task GetOhlcById(string id)
+        {
+            var result = await _cryptoService.GetOhlcByCoinId(id);
+
+            if (result != null)
+            {
+                Points = new List<OhlcViewModel>(result.Select(o => o.ToOhlcViewModel()));
+                SetChartsData();
+            }
+        }
+
+        private void SetChartsData()
+        {
+            var financialPoints = Points.Select(p => new FinancialPoint(
+                p.Time,
+                p.HighPrice,
+                p.OpenPrice,
+                p.ClosePrice,
+                p.LowPrice
+                )).ToList();
+
+            Series = new ObservableCollection<ISeries>
+            {
+                new CandlesticksSeries<FinancialPoint>() 
+                {
+                    Values =  financialPoints,
+                    UpStroke = new SolidColorPaint(SKColors.Green) {StrokeThickness = 2},
+                    UpFill = new SolidColorPaint(SKColors.LightGreen),
+                    DownStroke = new SolidColorPaint(SKColors.Red) {StrokeThickness = 2},
+                    DownFill = new SolidColorPaint(SKColors.Pink),
+                }
+            };
+
+            var labels = Points.Select(p => p.Time.ToString("dd.MM")).ToList();
+
+            XAxis = new ObservableCollection<Axis>
+            {
+                new Axis
+                {
+                    Labeler = value => 
+                    {
+                        var ticks = (long)value;
+                        
+                        if (ticks < DateTime.MinValue.Ticks || ticks > DateTime.MaxValue.Ticks)
+                        {
+                            return string.Empty;
+                        }
+
+                        return new DateTime(ticks).ToString("dd.MM");
+                    },
+                    LabelsPaint = new SolidColorPaint(SKColors.Black),
+                    UnitWidth = TimeSpan.FromHours(2).Ticks,
+                    MinStep   = TimeSpan.FromHours(2).Ticks
+                }
+            };
+
+            YAxis = new ObservableCollection<Axis>
+            {
+                new Axis
+                {
+                    Labeler = val => "$" + val.ToString("N2")
+                }
+            };
         }
 
         #endregion

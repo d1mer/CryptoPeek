@@ -56,6 +56,27 @@ namespace CryptoPeek.Services.Crypto
             return coin;
         }
 
+        public async Task<List<List<object>>> GetOhlcByCoinId(string id)
+        {
+            var result = new List<List<object>>();
+
+            try
+            {
+                var responce = await _restService.GetAsync<List<List<object>>, object>(Constants.WebAPI.COINGECKO_BASE_URL + string.Format(Constants.WebAPI.OHLC_BY_COIN_ID, id), GetApiKeyHeaderDictionary());
+
+                if (responce.IsSuccess)
+                {
+                    result = responce.SuccessResult;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"CryptoService.GetOhlcByCoinId error: {ex.Message}");
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region -- Private helpers --
