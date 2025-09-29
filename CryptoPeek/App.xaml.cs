@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using CryptoPeek.Services.Crypto;
 using CryptoPeek.Services.Rest;
 using CryptoPeek.Views;
+using CryptoPeek.Services.Theme;
 
 
 namespace CryptoPeek
@@ -40,6 +41,7 @@ namespace CryptoPeek
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IThemeService, ThemeService>();
             containerRegistry.Register<IRestService,  RestService>();
             containerRegistry.RegisterSingleton<ICryptoService, CryptoService>();
 

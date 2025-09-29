@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="PrimaryBackgroundBrush"   Color="#0E0E0E"/>
+    <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="#1C1C1C"/>
+    <SolidColorBrush x:Key="HoverBackgroundBrush"     Color="#2A2A2A"/>
+    <SolidColorBrush x:Key="SelectedBackgroundBrush"  Color="#1E3A8A"/>
+
+    <SolidColorBrush x:Key="PrimarTextyBrush"   Color="#E5E7EB"/>
+    <SolidColorBrush x:Key="SecondaryTextBrush" Color="#9CA3AF"/>
+    <SolidColorBrush x:Key="PlaceholderBrush"   Color="#6B7280"/>
+
+    <SolidColorBrush x:Key="PositiveChangeBrush" Color="#4CAF50"/>
+    <SolidColorBrush x:Key="NegativeChangeBrush" Color="#F44336"/>
+
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#1E1E1E"/>
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="#E5E7EB"/>
+    <SolidColorBrush x:Key="ControlBorderBrush"     Color="#374151"/>
+
+    <SolidColorBrush x:Key="ListItemBackgroundBrush"         Color="#111827"/>
+    <SolidColorBrush x:Key="ListItemHoverBrush"              Color="#1F2937"/>
+    <SolidColorBrush x:Key="ListItemSelectedBrush"           Color="#1E40AF"/>
+    <SolidColorBrush x:Key="ListItemSelectedForegroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="SelectionBrush"                  Color="#1E40AF"/>
+    <SolidColorBrush x:Key="SelectionForegroundBrush"        Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#2196F3"/>
+    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ButtonHoverBrush"      Color="#1976D2"/>
+
+</ResourceDictionary>
