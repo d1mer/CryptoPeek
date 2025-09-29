@@ -80,7 +80,7 @@ namespace CryptoPeek.ViewModels
 
         private async Task UpdateCoins()
         {
-            var coins = await _cryptoService.GetCoinsList();
+            var coins = await _cryptoService.GetCoinsListAsync();
 
             if (coins != null && coins.Count > 0)
             {

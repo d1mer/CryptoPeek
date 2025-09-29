@@ -1,6 +1,7 @@
 ﻿using CryptoPeek.Extensions;
 using CryptoPeek.Models.Coin;
 using CryptoPeek.Models.Ohlc;
+using CryptoPeek.Models.Tickers;
 using CryptoPeek.Services.Crypto;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
@@ -8,6 +9,7 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace CryptoPeek.ViewModels
@@ -23,6 +25,7 @@ namespace CryptoPeek.ViewModels
             _regionManager = regionManager;
 
             BackCommand = new DelegateCommand(OnBack);
+            OpenTradeUrlCommand = new DelegateCommand<string>(OpenTradeUrl);
         }
 
         #region -- Public properties --
@@ -93,7 +96,16 @@ namespace CryptoPeek.ViewModels
             set => SetProperty(ref _yAxis, value);
         }
 
+        private ObservableCollection<TickerViewModel> _tickers;
+        public ObservableCollection<TickerViewModel> Tickers
+        {
+            get => _tickers;
+            set => SetProperty(ref _tickers, value);
+        }
+
         public ICommand BackCommand { get; }
+
+        public ICommand OpenTradeUrlCommand { get; }
 
         #endregion
 
@@ -134,7 +146,7 @@ namespace CryptoPeek.ViewModels
         {
             if (!string.IsNullOrEmpty(id))
             {
-                var coin = await _cryptoService.GetCoinById(id);
+                var coin = await _cryptoService.GetCoinByIdAsync(id);
 
                 if (coin != null)
                 {
@@ -143,14 +155,15 @@ namespace CryptoPeek.ViewModels
                 }
 
                 GetOhlcById(id);
+                GetTickersById(id);
             }
         }
 
         private async Task GetOhlcById(string id)
         {
-            var result = await _cryptoService.GetOhlcByCoinId(id);
+            var result = await _cryptoService.GetOhlcByCoinIdAsync(id);
 
-            if (result != null)
+            if (result != null && result.Count > 0)
             {
                 Points = new List<OhlcViewModel>(result.Select(o => o.ToOhlcViewModel()));
                 SetChartsData();
@@ -209,6 +222,34 @@ namespace CryptoPeek.ViewModels
                     Labeler = val => "$" + val.ToString("N2")
                 }
             };
+        }
+
+        private async Task GetTickersById(string id)
+        {
+            var result = await _cryptoService.GetTickersByCoinIdAsync(id);
+
+            if (result != null && result.Count > 0) 
+            {
+                Tickers = new ObservableCollection<TickerViewModel>(result.Select(t => t.ToTickerViewModel()));
+            }
+        }
+
+        private void OpenTradeUrl(string url)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo(url)
+                    {
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Open trade url error: {ex.Message}");
+                }
+            }
         }
 
         #endregion

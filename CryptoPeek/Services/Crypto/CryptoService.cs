@@ -1,5 +1,7 @@
 ﻿using CryptoPeek.Models.Coin;
+using CryptoPeek.Models.Tickers;
 using CryptoPeek.Services.Rest;
+using System.Collections.Generic;
 
 namespace CryptoPeek.Services.Crypto
 {
@@ -14,7 +16,7 @@ namespace CryptoPeek.Services.Crypto
 
         #region -- ICryptoService implementation --
 
-        public async Task<List<CoinModel>> GetCoinsList()
+        public async Task<List<CoinModel>> GetCoinsListAsync()
         {
             var result = new List<CoinModel>();
 
@@ -35,7 +37,7 @@ namespace CryptoPeek.Services.Crypto
             return result;
         }
 
-        public async Task<CoinDetailsModel> GetCoinById(string id)
+        public async Task<CoinDetailsModel> GetCoinByIdAsync(string id)
         {
             CoinDetailsModel coin = default;
 
@@ -56,7 +58,7 @@ namespace CryptoPeek.Services.Crypto
             return coin;
         }
 
-        public async Task<List<List<object>>> GetOhlcByCoinId(string id)
+        public async Task<List<List<object>>> GetOhlcByCoinIdAsync(string id)
         {
             var result = new List<List<object>>();
 
@@ -72,6 +74,27 @@ namespace CryptoPeek.Services.Crypto
             catch (Exception ex)
             {
                 Console.WriteLine($"CryptoService.GetOhlcByCoinId error: {ex.Message}");
+            }
+
+            return result;
+        }
+
+        public async Task<List<TickerModel>> GetTickersByCoinIdAsync(string id)
+        {
+            var result = new List<TickerModel>();
+
+            try
+            {
+                var responce = await _restService.GetAsync<TickersResponceModel, object>(Constants.WebAPI.COINGECKO_BASE_URL + string.Format(Constants.WebAPI.TICKERS_BY_COIN_ID, id), GetApiKeyHeaderDictionary());
+
+                if (responce.IsSuccess)
+                {
+                    result.AddRange(responce.SuccessResult.Tickers);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"CryptoService.GetTickersByCoinId error: {ex.Message}");
             }
 
             return result;

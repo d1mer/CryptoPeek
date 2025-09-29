@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CryptoPeek.Views"
              xmlns:controls="clr-namespace:CryptoPeek.Controls"
+             xmlns:behaviors="clr-namespace:CryptoPeek.Behaviors"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1000">
@@ -199,6 +200,100 @@
                                     XAxes="{Binding XAxis}"
                                     YAxes="{Binding YAxis}"
                                     Height="400"/>
+                
+                <!-- TICKERS -->
+                <TextBlock Text="Tickers"
+                           FontSize="18"
+                           FontWeight="Medium"
+                           HorizontalAlignment="Left"
+                           Margin="10,10,0,15" />
+
+                <ListView ItemsSource="{Binding Tickers}"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.CanContentScroll="False"
+                          behaviors:ScrollBehavior.FixMouseWheelScroll="True">
+
+                    <ListView.Resources>
+
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#F5F5F5" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn Header="Exchange"
+                                            Width="Auto">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        
+                                        <StackPanel Orientation="Horizontal">
+                                            
+                                            <Image Source="{Binding Logo}"
+                                                   Width="18"
+                                                   Height="18" />
+
+                                            <TextBlock Text="{Binding MarketName}"
+                                                       FontSize="12"
+                                                       Margin="5,0,0,0" />
+
+                                        </StackPanel>
+                                        
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Trading Pair"
+                                            Width="100"
+                                            DisplayMemberBinding="{Binding BaseTarget}" />
+
+                            <GridViewColumn Header="Last Traded Price"
+                                            Width="110"
+                                            DisplayMemberBinding="{Binding LastPrice, Converter={StaticResource decimalToStringConverter}}" />
+
+                            <GridViewColumn Header="Volume (24h)"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding Volume24h, Converter={StaticResource decimalToStringConverter}}" />
+
+                            <GridViewColumn Header="Spread"
+                                            Width="120"
+                                            DisplayMemberBinding="{Binding SpreadPercentage, Converter={StaticResource tickerSpreadPercentConverter}}" />
+
+                            <GridViewColumn Header="Trade"
+                                            Width="80">
+                                
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+
+                                        <TextBlock>
+                                            <Hyperlink Command="{Binding DataContext.OpenTradeUrlCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                       CommandParameter="{Binding TradeUrl}">
+                                                <Run Text="Go" />
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                    
+                </ListView>
 
 
             </StackPanel>

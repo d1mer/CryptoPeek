@@ -11,6 +11,7 @@
             public const string COINS_LIST = @"coins/markets?vs_currency=usd";
             public const string COIN_BY_ID = @"coins/{0}?localization=false&tickers=false&developer_data=false&community_data=false";
             public const string OHLC_BY_COIN_ID = @"coins/{0}/ohlc?vs_currency=usd&days=7&precision=2";
+            public const string TICKERS_BY_COIN_ID = @"coins/{0}/tickers?include_exchange_logo=true";
         }
     }
 }

@@ -8,7 +8,7 @@ namespace CryptoPeek.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (decimal.TryParse(value.ToString(), out var percent))
+            if (value != null && decimal.TryParse(value.ToString(), out var percent))
             {
                 return percent > 0 ? Brushes.Green
                                    : percent < 0

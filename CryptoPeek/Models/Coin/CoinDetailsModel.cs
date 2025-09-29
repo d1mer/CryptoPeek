@@ -1,39 +1,34 @@
 ﻿using Newtonsoft.Json;
-using System.Security.Policy;
 
 namespace CryptoPeek.Models.Coin
 {
     public class CoinDetailsModel
     {
         [JsonProperty("id")]
-        public string Id { get; set; }  // done
+        public string Id { get; set; }
 
         [JsonProperty("symbol")]
-        public string Symbol { get; set; }  // done
+        public string Symbol { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }  // done
-
+        public string Name { get; set; }
         [JsonProperty("hashing_algorithm")]
-        public string HashingAlgorithm { get; set; }  // done
-
-        [JsonProperty("categories")]
-        public List<string> Categories { get; set; }
+        public string HashingAlgorithm { get; set; }
 
         [JsonProperty("description")]
-        public Dictionary<string, string> Description { get; set; } // done
+        public Dictionary<string, string> Description { get; set; }
 
         [JsonProperty("links")]
         public CoinLinks Links { get; set; }
 
         [JsonProperty("image")]
-        public CoinImages Image { get; set; }  // done
+        public CoinImages Image { get; set; }
 
         [JsonProperty("genesis_date")]
-        public DateTime? GenesisDate { get; set; }  // done
+        public DateTime? GenesisDate { get; set; }
 
         [JsonProperty("market_cap_rank")]
-        public int? MarketCapRank { get; set; } // done
+        public int? MarketCapRank { get; set; }
 
         [JsonProperty("market_data")]
         public MarketData MarketData { get; set; }
@@ -93,57 +88,18 @@ namespace CryptoPeek.Models.Coin
     public class MarketData
     {
         [JsonProperty("current_price")]
-        public Dictionary<string, decimal> CurrentPrice { get; set; }  // done
-
-        [JsonProperty("roi")]
-        public Roi Roi { get; set; }
+        public Dictionary<string, decimal> CurrentPrice { get; set; } 
 
         [JsonProperty("market_cap")]
-        public Dictionary<string, decimal> MarketCap { get; set; }  // done
+        public Dictionary<string, decimal> MarketCap { get; set; }
 
-        [JsonProperty("total_volume")]
-        public Dictionary<string, decimal> TotalVolume { get; set; }
-
-        [JsonProperty("high_24h")]
-        public Dictionary<string, decimal> High24h { get; set; }
-
-        [JsonProperty("low_24h")]
-        public Dictionary<string, decimal> Low24h { get; set; }
-
-        [JsonProperty("price_change_24h")]
-        public decimal? PriceChange24h { get; set; }
-
-        [JsonProperty("price_change_percentage_24h")]
-        public decimal? PriceChangePercentage24h { get; set; }
-
-        [JsonProperty("price_change_percentage_7d")]
-        public decimal? PriceChangePercentage7d { get; set; }
-
-        [JsonProperty("price_change_percentage_14d")]
-        public decimal? PriceChangePercentage14d { get; set; }
-
-        [JsonProperty("price_change_percentage_30d")]
-        public decimal? PriceChangePercentage30d { get; set; }
-
-        [JsonProperty("price_change_percentage_60d")]
-        public decimal? PriceChangePercentage60d { get; set; }
-
-        [JsonProperty("price_change_percentage_200d")]
-        public decimal? PriceChangePercentage200d { get; set; }
-
-        [JsonProperty("price_change_percentage_1y")]
-        public decimal? PriceChangePercentage1y { get; set; }
-
-        [JsonProperty("market_cap_change_24h")]
-        public decimal? MarketCapChange24h { get; set; }
-
-        [JsonProperty("total_supply")]
-        public decimal? TotalSupply { get; set; } // done
+       [JsonProperty("total_supply")]
+        public decimal? TotalSupply { get; set; }
 
         [JsonProperty("circulating_supply")]
-        public decimal? CirculatingSupply { get; set; } // done
+        public decimal? CirculatingSupply { get; set; }
 
         [JsonProperty("max_supply")]
-        public decimal? MaxSupply { get; set; } // done
+        public decimal? MaxSupply { get; set; }
     }
 }
