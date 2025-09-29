@@ -47,6 +47,7 @@ namespace CryptoPeek
 
             containerRegistry.RegisterForNavigation<CoinsView>();
             containerRegistry.RegisterForNavigation<CoinDetailsView>();
+            containerRegistry.RegisterForNavigation<SettingsView>();
         }
     }
 

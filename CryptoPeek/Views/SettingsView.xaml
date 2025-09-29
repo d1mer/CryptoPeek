@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="CryptoPeek.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CryptoPeek.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="650" d:DesignWidth="1000">
+
+    <Grid Margin="5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.04*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- BACK BUTTON -->
+        <Button HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderThickness="0"
+                Command="{Binding BackCommand}">
+            
+            <Image Source="/Resources/Images/ic_arrow.png" />
+            
+        </Button>
+
+        <Button Grid.Row="1" 
+                Content="{Binding IsDarkTheme, Converter={StaticResource themeToTextConverter}}"
+                Command="{Binding ToggleThemeCommand}"
+                Background="{DynamicResource ButtonBackgroundBrush}"
+                Foreground="{DynamicResource ButtonForegroundBrush}"
+                Padding="15,8"
+                Margin="10,20,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"/>
+
+    </Grid>
+    
+</UserControl>

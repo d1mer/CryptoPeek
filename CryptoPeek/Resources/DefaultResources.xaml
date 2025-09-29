@@ -9,5 +9,6 @@
     <converters:DateToStringConverter x:Key="DateToStringConverter" />
     <converters:NoStringConverter x:Key="noStringConverter" />
     <converters:TickerSpreadPercentConverter x:Key="tickerSpreadPercentConverter" />
+    <converters:ThemeToTextConverter x:Key="themeToTextConverter" />
 
 </ResourceDictionary>
