@@ -27,6 +27,7 @@ namespace CryptoPeek.ViewModels
 
             BackCommand = new DelegateCommand(OnBack);
             OpenUrlCommand = new DelegateCommand<string>(OpenUrl);
+            SettingsCommand = new DelegateCommand(OnSettings);
         }
 
         #region -- Public properties --
@@ -107,6 +108,8 @@ namespace CryptoPeek.ViewModels
         public ICommand BackCommand { get; }
 
         public ICommand OpenUrlCommand { get; }
+
+        public ICommand SettingsCommand { get; }
 
         #endregion
 
@@ -256,6 +259,11 @@ namespace CryptoPeek.ViewModels
                     Console.WriteLine($"Open trade url error: {ex.Message}");
                 }
             }
+        }
+
+        private void OnSettings()
+        {
+            _regionManager.RequestNavigate("MainRegion", "SettingsView");
         }
 
         #endregion

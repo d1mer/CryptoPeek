@@ -24,6 +24,19 @@
                             SearchText="{Binding SearchText,
                               Mode=OneWayToSource}"
                             ClearCommand="{Binding ClearSearchCommand}"/>
+         
+        <!-- SETTINGS BUTTON -->
+        <Button Grid.Row="0"
+                HorizontalAlignment="Right"
+                Margin="10"
+                BorderThickness="0"
+                Background="Transparent"
+                Command="{Binding SettingsCommand}">
+
+            <Image Source="/Resources/Images/ic_settings.png" />
+            
+        </Button>
+                
 
         <ListView Grid.Row="1" 
                   ItemsSource="{Binding Coins}"

@@ -30,12 +30,27 @@
         <!-- BACK BUTTON -->
         <Button Grid.Row="0"
                 HorizontalAlignment="Left"
+                VerticalAlignment="Center"
                 Background="Transparent"
                 BorderThickness="0"
                 Command="{Binding BackCommand}">
+            
             <Image Source="/Resources/Images/ic_arrow.png" />
+            
         </Button>
-        
+
+        <!-- SETTINGS BUTTON -->
+        <Button Grid.Row="0"
+                HorizontalAlignment="Right"
+                Margin="0,0,10,0"
+                BorderThickness="0"
+                Background="Transparent"
+                Command="{Binding SettingsCommand}">
+
+            <Image Source="/Resources/Images/ic_settings.png" />
+
+        </Button>
+
         <!-- MAIN CONTENT -->
         <ScrollViewer Grid.Row="1"
                       Margin="5,5,0,0">

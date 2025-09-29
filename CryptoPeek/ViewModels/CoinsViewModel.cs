@@ -21,6 +21,7 @@ namespace CryptoPeek.ViewModels
 
             OpenCoinDetailsCommand = new DelegateCommand<CoinShortViewModel>(OnOpenCoinDetails);
             ClearSearchCommand = new DelegateCommand(OnClearSearch);
+            SettingsCommand = new DelegateCommand(OnSettings);
         }
 
         #region -- Public properties --
@@ -54,6 +55,8 @@ namespace CryptoPeek.ViewModels
         public ICommand OpenCoinDetailsCommand { get; }
 
         public ICommand ClearSearchCommand { get; }
+
+        public ICommand SettingsCommand { get; }
 
         #endregion
 
@@ -158,6 +161,11 @@ namespace CryptoPeek.ViewModels
             {
                 CopyCoins(ECoinsCopyDirection.ToPermanent);
             }
+        }
+
+        private void OnSettings()
+        {
+            _regionManager.RequestNavigate("MainRegion", "SettingsView");
         }
 
         #endregion
