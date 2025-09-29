@@ -26,7 +26,7 @@ namespace CryptoPeek.ViewModels
             _regionManager = regionManager;
 
             BackCommand = new DelegateCommand(OnBack);
-            OpenTradeUrlCommand = new DelegateCommand<string>(OpenTradeUrl);
+            OpenUrlCommand = new DelegateCommand<string>(OpenUrl);
         }
 
         #region -- Public properties --
@@ -106,7 +106,7 @@ namespace CryptoPeek.ViewModels
 
         public ICommand BackCommand { get; }
 
-        public ICommand OpenTradeUrlCommand { get; }
+        public ICommand OpenUrlCommand { get; }
 
         #endregion
 
@@ -240,7 +240,7 @@ namespace CryptoPeek.ViewModels
             }
         }
 
-        private void OpenTradeUrl(string url)
+        private void OpenUrl(string url)
         {
             if (!string.IsNullOrEmpty(url))
             {

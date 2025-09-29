@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace CryptoPeek.Models.Coin
 {
@@ -20,6 +21,8 @@ namespace CryptoPeek.Models.Coin
         public int? MarketCapRank { get; set; }
 
         public MarketDataViewModel MarketData { get; set; }
+
+        public ObservableCollection<GroupUrls> Links { get; set; }
     }
 
     public class MarketDataViewModel
@@ -33,5 +36,12 @@ namespace CryptoPeek.Models.Coin
         public decimal? CirculatingSupply { get; set; }
 
         public decimal? MaxSupply { get; set; }
+    }
+
+    public class GroupUrls
+    {
+        public string Name { get; set; }
+
+        public ObservableCollection<string> Urls { get; set; }
     }
 }

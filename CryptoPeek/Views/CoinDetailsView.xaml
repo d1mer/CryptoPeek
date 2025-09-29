@@ -238,9 +238,9 @@
                                             Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        
+
                                         <StackPanel Orientation="Horizontal">
-                                            
+
                                             <Image Source="{Binding Logo}"
                                                    Width="18"
                                                    Height="18" />
@@ -250,10 +250,10 @@
                                                        Margin="5,0,0,0" />
 
                                         </StackPanel>
-                                        
+
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                                
+
                             </GridViewColumn>
 
                             <GridViewColumn Header="Trading Pair"
@@ -274,27 +274,65 @@
 
                             <GridViewColumn Header="Trade"
                                             Width="80">
-                                
+
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
 
                                         <TextBlock>
-                                            <Hyperlink Command="{Binding DataContext.OpenTradeUrlCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            <Hyperlink Command="{Binding DataContext.OpenTradeCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                                        CommandParameter="{Binding TradeUrl}">
                                                 <Run Text="Go" />
                                             </Hyperlink>
                                         </TextBlock>
-                                        
+
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                                
+
                             </GridViewColumn>
 
                         </GridView>
                     </ListView.View>
-                    
+
                 </ListView>
 
+                <TextBlock Text="Related Links"
+                           Margin="10,10,0,15"
+                           FontSize="16"
+                           FontWeight="Medium" />
+
+                <ItemsControl ItemsSource="{Binding Coin.Links}"
+                              Margin="5,0,0,10">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+
+                            <StackPanel>
+
+                                <TextBlock Text="{Binding Name}"
+                                           FontSize="12"
+                                           FontWeight="Medium"
+                                           Foreground="#565656"
+                                           Margin="5,10,0,5"/>
+
+                                <ItemsControl ItemsSource="{Binding Urls}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+
+                                            <TextBlock Margin="0,0,0,5">
+                                                <Hyperlink Command="{Binding DataContext.OpenUrlCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                           CommandParameter="{Binding .}">
+                                                    <Run Text="{Binding .}" />
+                                                </Hyperlink>
+                                            </TextBlock>
+                                            
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                
+                            </StackPanel>
+                            
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
             </StackPanel>
 
