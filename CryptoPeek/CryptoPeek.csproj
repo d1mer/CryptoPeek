@@ -10,9 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\ic_arrow.png" />
-    <None Remove="Images\ic_search.png" />
-    <None Remove="Images\ic_settings.png" />
+    <None Remove="Resources\Images\ic_arrow.png" />
+    <None Remove="Resources\Images\ic_search.png" />
+    <None Remove="Resources\Images\ic_settings.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,13 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\ic_arrow.png">
+    <Resource Include="Resources\Images\ic_arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\ic_search.png">
+    <Resource Include="Resources\Images\ic_search.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\ic_settings.png">
+    <Resource Include="Resources\Images\ic_settings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

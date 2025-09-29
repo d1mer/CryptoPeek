@@ -33,7 +33,7 @@
                 Background="Transparent"
                 BorderThickness="0"
                 Command="{Binding BackCommand}">
-            <Image Source="/Images/ic_arrow.png" />
+            <Image Source="/Resources/Images/ic_arrow.png" />
         </Button>
         
         <!-- MAIN CONTENT -->
