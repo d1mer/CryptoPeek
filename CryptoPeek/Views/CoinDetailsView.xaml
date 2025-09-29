@@ -279,7 +279,7 @@
                                     <DataTemplate>
 
                                         <TextBlock>
-                                            <Hyperlink Command="{Binding DataContext.OpenTradeCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            <Hyperlink Command="{Binding DataContext.OpenUrlCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                                        CommandParameter="{Binding TradeUrl}">
                                                 <Run Text="Go" />
                                             </Hyperlink>
