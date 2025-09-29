@@ -20,7 +20,7 @@ namespace CryptoPeek.Models.Tickers
         public decimal Volume { get; set; }
 
         [JsonProperty("bid_ask_spread_percentage")]
-        public decimal Spread { get; set; }
+        public decimal? Spread { get; set; }
 
         [JsonProperty("trade_url")]
         public string TradeUrl { get; set; }

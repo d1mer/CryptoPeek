@@ -41,7 +41,7 @@ namespace CryptoPeek
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IRestService,  RestService>();
-            containerRegistry.Register<ICryptoService, CryptoService>();
+            containerRegistry.RegisterSingleton<ICryptoService, CryptoService>();
 
             containerRegistry.RegisterForNavigation<CoinsView>();
             containerRegistry.RegisterForNavigation<CoinDetailsView>();

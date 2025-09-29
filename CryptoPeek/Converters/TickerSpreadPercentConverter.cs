@@ -12,7 +12,7 @@ namespace CryptoPeek.Converters
                 return $"{dec.ToString("G29", CultureInfo.InvariantCulture)}%";
             }
 
-            return string.Empty;
+            return "\u2014";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

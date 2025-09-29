@@ -11,6 +11,8 @@ namespace CryptoPeek.Services.Crypto
 
         Task<List<List<object>>> GetOhlcByCoinIdAsync(string id);
 
-        Task<List<TickerModel>> GetTickersByCoinIdAsync(string id);
+        void StartLoadingTickersByCoinId(string id);
+
+        Task<List<TickerModel>> GetTickersAsync();
     }
 }

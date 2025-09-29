@@ -10,6 +10,7 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CryptoPeek.ViewModels
@@ -155,7 +156,7 @@ namespace CryptoPeek.ViewModels
                 }
 
                 GetOhlcById(id);
-                GetTickersById(id);
+                LoadTickers();
             }
         }
 
@@ -224,13 +225,18 @@ namespace CryptoPeek.ViewModels
             };
         }
 
-        private async Task GetTickersById(string id)
+        private async Task LoadTickers()
         {
-            var result = await _cryptoService.GetTickersByCoinIdAsync(id);
+            var result = await _cryptoService.GetTickersAsync();
 
             if (result != null && result.Count > 0) 
             {
-                Tickers = new ObservableCollection<TickerViewModel>(result.Select(t => t.ToTickerViewModel()));
+                var tickersViewModels = result.Select(t => t.ToTickerViewModel()).ToList();
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    Tickers = new ObservableCollection<TickerViewModel>(tickersViewModels);
+                });
             }
         }
 

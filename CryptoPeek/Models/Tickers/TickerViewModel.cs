@@ -12,7 +12,7 @@
 
         public decimal Volume24h { get; set; }
 
-        public decimal SpreadPercentage { get; set; }
+        public decimal? SpreadPercentage { get; set; }
 
         public string TradeUrl { get; set; }
     }

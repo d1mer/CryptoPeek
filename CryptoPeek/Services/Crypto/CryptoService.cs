@@ -8,6 +8,7 @@ namespace CryptoPeek.Services.Crypto
     public class CryptoService : ICryptoService
     {
         private readonly IRestService _restService;
+        private TaskCompletionSource<List<TickerModel>> _tcs;
 
         public CryptoService(IRestService restService)
         {
@@ -79,25 +80,32 @@ namespace CryptoPeek.Services.Crypto
             return result;
         }
 
-        public async Task<List<TickerModel>> GetTickersByCoinIdAsync(string id)
-        {
-            var result = new List<TickerModel>();
+        public void StartLoadingTickersByCoinId(string id)
+        {     
+            _tcs = new TaskCompletionSource<List<TickerModel>>();
 
-            try
+            Task.Run(async () =>
             {
-                var responce = await _restService.GetAsync<TickersResponceModel, object>(Constants.WebAPI.COINGECKO_BASE_URL + string.Format(Constants.WebAPI.TICKERS_BY_COIN_ID, id), GetApiKeyHeaderDictionary());
-
-                if (responce.IsSuccess)
+                try
                 {
-                    result.AddRange(responce.SuccessResult.Tickers);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"CryptoService.GetTickersByCoinId error: {ex.Message}");
-            }
+                    var responce = await _restService.GetAsync<TickersResponceModel, object>(Constants.WebAPI.COINGECKO_BASE_URL + string.Format(Constants.WebAPI.TICKERS_BY_COIN_ID, id), GetApiKeyHeaderDictionary());
 
-            return result;
+                    if (responce.IsSuccess)
+                    {
+                        _tcs.TrySetResult(responce.SuccessResult.Tickers);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"CryptoService.GetTickersByCoinId error: {ex.Message}");
+                    _tcs.TrySetException(ex);
+                }
+            });
+        }
+
+        public async Task<List<TickerModel>> GetTickersAsync()
+        {
+            return await _tcs.Task;
         }
 
         #endregion

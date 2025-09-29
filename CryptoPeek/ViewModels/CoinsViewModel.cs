@@ -139,6 +139,8 @@ namespace CryptoPeek.ViewModels
         {
             if (coin != null)
             {
+                _cryptoService.StartLoadingTickersByCoinId(coin.Id);
+
                 var navigationParameters = new NavigationParameters
                 {
                     {
