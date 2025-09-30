@@ -24,8 +24,8 @@
     <SolidColorBrush x:Key="SelectionBrush"                  Color="#DBEAFE"/>
     <SolidColorBrush x:Key="SelectionForegroundBrush"        Color="#1E3A8A"/>
 
-    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#2196F3"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#6366F1"/>
     <SolidColorBrush x:Key="ButtonForegroundBrush" Color="#FFFFFF"/>
-    <SolidColorBrush x:Key="ButtonHoverBrush" Color="#1976D2"/>
+    <SolidColorBrush x:Key="ButtonHoverBrush" Color="#4F46E5"/>
 
 </ResourceDictionary>
