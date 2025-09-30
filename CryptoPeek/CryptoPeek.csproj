@@ -7,12 +7,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <UserSecretsId>68181c98-1e43-4ee1-81af-ff5398a0baaa</UserSecretsId>
+    <ApplicationIcon>app_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\Images\ic_arrow.png" />
     <None Remove="Resources\Images\ic_search.png" />
     <None Remove="Resources\Images\ic_settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="app_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
